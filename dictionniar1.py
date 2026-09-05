@@ -3,6 +3,8 @@ First_dict = { "Appareil": "Laptop", "Marque": "IBM", "Carte mère": "MSI Z490",
 if First_dict["RAM"]=="16G":
     First_dict["RAM"]="16G"
 print(First_dict)
+
+
 for cle,val in First_dict.items():
     print(cle,val)
 print(First_dict.keys())
@@ -86,10 +88,10 @@ def filtrer_dictionnaire(fc,d):
     # for cle,val in d.items:
     #     if fc(val):
     #         d1[cle]=val
-    d1=dict(filter(lambda couple:fc(couple[1]),d.items()))
+    d1=dict(filter(fc,d.items()))
     return d1
 d={'a': 5, 'b': 12, 'c': 8, 'd': 15}
-fs=lambda x:x>10 and x%2==0
+fs=lambda x:x[1]>10 and x[1]%2==0
 print(filtrer_dictionnaire(fs,d)) 
 
 def filtrer_dictionnaire(fc,d):
@@ -107,9 +109,9 @@ d3={'a': 10, 'b': 5, 'c': 15}
 def dictionnaire_vers_tuples(d2,t1):
   
     t=()
-    t=sorted(d2.items(),key=lambda couple:t1(couple[1]))
+    t=sorted(d2.items(),key=t1)
     return t
-t1=lambda x:x
+t1=lambda x:x[1]
 
 print(dictionnaire_vers_tuples(d3,t1))
 #challenge 4:
@@ -127,40 +129,30 @@ def regrouper_tuples(t4):
 
     return d1
 #challenge 5:
+def transformer_tuples(L):
+    p=list(map(lambda x:tuple(map(lambda y:y*2,x)),L))
+    return p
+a=[(2, 4), (6, 8)]
+print(transformer_tuples(a))
+#challenge6:
 
-        
+def aplatir_dictionnaire(d):
+    result = []
+    for k,v in d.items():
+        if not isinstance(v,dict):
+            result.append((k,v))
+        else:
+            for k2, v2 in v.items():
+                result.append((f"{k}.{k2}", v2))
 
-        
-               
-              
-               
-          
-
-
-
-        
-
-
-
-
-
-
-          
+    return result
 
 
+D = {'a': 1, 'b': {'c': 2, 'd': 3}}
 
+print(aplatir_dictionnaire(D))
 
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
